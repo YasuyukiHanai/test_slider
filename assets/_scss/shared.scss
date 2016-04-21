@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+/* Tools */
+@import "compass",
+"tool/font-size/ptp-14";
+
+/* style Setting  */
+@import "_utility.scss";
+@import "_layout.scss";
+
+/* modules */ //*コンテンツ増えたら追加
+// @import "modules/_header.scss"; //*ローカルのヘッダー
+// @import "modules/_endArea.scss";
+
+/* index */
+// @import "modules/_index_firstView.scss";
+// @import "modules/_index_special.scss";
+@import "modules/_index_lineup.scss";
+// @import "modules/_index_qa.scss";
+
+/* 下層ページ / body.subpageで判別 */
+// @import "modules/_lineup.scss"; //*商品紹介
+// @import "modules/_history.scss"; //*歴史
+// @import "modules/_drink.scss"; //*おいしい飲み方
+
