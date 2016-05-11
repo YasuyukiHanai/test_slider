@@ -76,8 +76,10 @@
 				sliderFigCaption = '.index .sliderWrWr .figcaption',
 				sliderPrev = '.index .sliderWrWr .prev',
 				sliderNext = '.index .sliderWrWr .next',
+				slidertimer = '.index .sliderWrWr .controlNav__btn-timerBtn',
 				sliderPhotoNum = '.index .indicator .photoNum',
 				sliderDelete = '.index .sliderWr .delete',
+				isAutoPlay = true,
 				loop_time = 5000;
 
 			// 1)img要素の情報を取得して出力
@@ -219,7 +221,25 @@
 					}
 				);
 			};
-
+			// *+4)タイマー設置
+			$(slidertimer).click(function(e){
+				e.preventDefault();
+				if(isAutoPlay){
+					$(slidertimer).removeClass("is-play").addClass("is-stop");
+					isAutoPlay = false;
+					clearInterval(loopSwitch);
+				}else{
+					$(slidertimer).addClass("is-play").removeClass("is-stop");
+					isAutoPlay = true;
+					clearInterval(loopSwitch);
+					checkTimer();
+				}
+			});
+			function checkTimer(){
+				if(isAutoPlay){
+					loopSwitch = setInterval(loop, loop_time);
+				}
+			}
 
 			// 5)左右ボタンでスライド
 			$(sliderPrev).bind('click',function(e){//左ボタンで右スライド
@@ -231,7 +251,7 @@
 						$(sliderFigure).last().prependTo(sliderFigureWr);
 						photoNum();
 						clearInterval(loopSwitch);
-						loopSwitch = setInterval(loop, loop_time);
+						checkTimer();
 					}
 				);
 				e.preventDefault();
@@ -245,7 +265,7 @@
 						$(sliderFigure).first().appendTo(sliderFigureWr);
 						photoNum();
 						clearInterval(loopSwitch);
-						loopSwitch = setInterval(loop, loop_time);
+						checkTimer();
 					}
 				);
 				e.preventDefault();
@@ -296,7 +316,7 @@
 				}else if(absX < imgHalfWidth){//スライド距離が半分未満
 					$(sliderFigureWr).animate({marginLeft: -+sliderFigureWidth+'px'},200,'linear')
 				};
-				loopSwitch = setInterval(loop, loop_time);
+				checkTimer();
 			});
 		};
 	},
